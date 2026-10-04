@@ -58,7 +58,7 @@ Metadata:
 Parameters:
   NestedStacksS3BucketName:
     Type: String
-    Default: "subhamay-cfn-nested-templates-270453428528-devl-us-east-1"
+    Default: "subhamay-cfn-templates-bucket-270453428528-us-east-1"
     Description: "S3 bucket name where the nested CloudFormation template is stored"
     MinLength: 3
     MaxLength: 63
@@ -139,7 +139,7 @@ Resources:
           - "IAM principal must have s3:GetObject permission on the template S3 bucket"
           - "CloudFormation service must have permission to assume the required IAM role for S3 and KMS operations"
     Properties:
-      TemplateURL: !Sub "https://${NestedStacksS3BucketName}.s3.us-east-1.amazonaws.com/cloudformation-template/s3-bucket.yaml"
+      TemplateURL: !Sub https://${NestedStacksS3BucketName}.s3.us-east-1.amazonaws.com/cfn-nested-aws-s3-bucket/template.yaml
       Parameters:
         ProjectName: !Ref ProjectName
         BucketBaseName: !Ref RawDataBucketBaseName
@@ -165,7 +165,7 @@ Resources:
           - "IAM principal must have s3:GetObject permission on the template S3 bucket"
           - "CloudFormation service must have permission to assume the required IAM role for S3 and KMS operations"
     Properties:
-      TemplateURL: !Sub "https://${NestedStacksS3BucketName}.s3.us-east-1.amazonaws.com/cloudformation-template/s3-bucket.yaml"
+      TemplateURL: !Sub https://${NestedStacksS3BucketName}.s3.us-east-1.amazonaws.com/cfn-nested-aws-s3-bucket/template.yaml
       Parameters:
         ProjectName: !Ref ProjectName
         BucketBaseName: !Ref ProcessedDataBucketBaseName
@@ -191,7 +191,7 @@ Resources:
           - "IAM principal must have s3:GetObject permission on the template S3 bucket"
           - "CloudFormation service must have permission to assume the required IAM role for S3 and KMS operations"
     Properties:
-      TemplateURL: !Sub "https://${NestedStacksS3BucketName}.s3.us-east-1.amazonaws.com/cloudformation-template/s3-bucket.yaml"
+      TemplateURL: !Sub https://${NestedStacksS3BucketName}.s3.us-east-1.amazonaws.com/cfn-nested-aws-s3-bucket/template.yaml
       Parameters:
         ProjectName: !Ref ProjectName
         BucketBaseName: !Ref FinalDataBucketBaseName
