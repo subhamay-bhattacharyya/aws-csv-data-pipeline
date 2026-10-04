@@ -1,5 +1,6 @@
 {
   "Environment": "devl",
   "KmsKey": "SB-KMS",
+  "EnableBucketKey": "true",
   "CiSuffix": ""
 }
