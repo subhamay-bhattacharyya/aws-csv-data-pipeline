@@ -129,7 +129,7 @@ Parameters:
 Resources:
   S3RawDataBucketNestedStack:
     Type: AWS::CloudFormation::Stack
-    DeletionPolicy: Retain
+    DeletionPolicy: Delete
     UpdateReplacePolicy: Retain
     Metadata:
       com.aws.cloudformation.Context:
@@ -155,7 +155,7 @@ Resources:
 
   S3ProcessedDataBucketNestedStack:
     Type: AWS::CloudFormation::Stack
-    DeletionPolicy: Retain
+    DeletionPolicy: Delete
     UpdateReplacePolicy: Retain
     Metadata:
       com.aws.cloudformation.Context:
@@ -181,7 +181,7 @@ Resources:
 
   S3FinalDataBucketNestedStack:
     Type: AWS::CloudFormation::Stack
-    DeletionPolicy: Retain
+    DeletionPolicy: Delete
     UpdateReplacePolicy: Retain
     Metadata:
       com.aws.cloudformation.Context:
