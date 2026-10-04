@@ -51,9 +51,46 @@ jobs:
             echo "| Parameter File | \`$PARAMETER_FILE\` |"
           } >> $GITHUB_STEP_SUMMARY
 
+  upload-nested-templates:
+    name: Upload Nested Templates to S3
+    runs-on: ubuntu-26.04
+    environment: ci
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/${{ vars.AWS_OIDC_ROLE_NAME }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Upload nested templates to S3
+        run: |
+          BUCKET_NAME=$(grep -o 'subhamay-cfn-templates-bucket[^"]*' cloudformation/template.yaml | head -1)
+          BUCKET_NAME="${BUCKET_NAME:-subhamay-cfn-templates-bucket-270453428528-us-east-1}"
+          S3_PREFIX="cfn-nested-aws-s3-bucket"
+
+          echo "📤 Uploading nested templates to S3..."
+          echo "Bucket: $BUCKET_NAME"
+          echo "Prefix: $S3_PREFIX"
+
+          if [ -d "templates" ]; then
+            aws s3 sync templates/ "s3://$BUCKET_NAME/$S3_PREFIX/" \
+              --region "${{ vars.AWS_REGION }}" \
+              --exclude "*" \
+              --include "*.yaml" \
+              --include "*.yml"
+            echo "✅ Nested templates uploaded successfully"
+          else
+            echo "⚠️  No templates directory found, skipping upload"
+          fi
+
   ci-build:
     name: CI Build
-    needs: load-config
+    needs: [load-config, upload-nested-templates]
     uses: subhamay-bhattacharyya-gha/cfn-ci-build-reusable-wf/.github/workflows/ci.yaml@main
     with:
       environment: ci
