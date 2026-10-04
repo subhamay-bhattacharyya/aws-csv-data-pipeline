@@ -124,7 +124,7 @@ Resources:
           - "IAM principal must have s3:GetObject permission on the template S3 bucket"
           - "CloudFormation service must have permission to assume the required IAM role for S3 and KMS operations"
     Properties:
-      TemplateURL: !Sub "https://s3.${AWS::Region}.amazonaws.com/${NestedStacksS3BucketName}/cfn-nested-aws-s3-bucket/template.yaml"
+      TemplateURL: !Sub "https://${NestedStacksS3BucketName}.s3.us-east-1.amazonaws.com/cfn-nested-aws-s3-bucket/template.yaml"
       Parameters:
         ProjectName: !Ref ProjectName
         BucketBaseName: !Ref RawDataBucketBaseName
@@ -150,7 +150,7 @@ Resources:
           - "IAM principal must have s3:GetObject permission on the template S3 bucket"
           - "CloudFormation service must have permission to assume the required IAM role for S3 and KMS operations"
     Properties:
-      TemplateURL: !Sub "https://s3.${AWS::Region}.amazonaws.com/${NestedStacksS3BucketName}/cfn-nested-aws-s3-bucket/template.yaml"
+      TemplateURL: !Sub "https://${NestedStacksS3BucketName}.s3.us-east-1.amazonaws.com/cfn-nested-aws-s3-bucket/template.yaml"
       Parameters:
         ProjectName: !Ref ProjectName
         BucketBaseName: !Ref ProcessedDataBucketBaseName
@@ -176,7 +176,7 @@ Resources:
           - "IAM principal must have s3:GetObject permission on the template S3 bucket"
           - "CloudFormation service must have permission to assume the required IAM role for S3 and KMS operations"
     Properties:
-      TemplateURL: !Sub "https://s3.${AWS::Region}.amazonaws.com/${NestedStacksS3BucketName}/cfn-nested-aws-s3-bucket/template.yaml"
+      TemplateURL: !Sub "https://${NestedStacksS3BucketName}.s3.us-east-1.amazonaws.com/cfn-nested-aws-s3-bucket/template.yaml"
       Parameters:
         ProjectName: !Ref ProjectName
         BucketBaseName: !Ref FinalDataBucketBaseName
