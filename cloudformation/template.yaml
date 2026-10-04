@@ -43,7 +43,7 @@ Metadata:
 Parameters:
   NestedStacksS3BucketName:
     Type: String
-    Default: "subhamay-cfn-templates-bucket-270453428528-us-east-1"
+    Default: "subhamay-cfn-templates-bucket-575937057599-us-east-1"
     Description: "S3 bucket name where the nested CloudFormation template is stored"
     MinLength: 3
     MaxLength: 63
