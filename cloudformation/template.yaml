@@ -10,11 +10,22 @@ Metadata:
         Parameters:
           - NestedStacksS3BucketName
       - Label:
-          default: "S3 Bucket Configuration"
+          default: "Common Bucket Configuration"
         Parameters:
           - ProjectName
-          - RawDataBucketBaseName
           - Environment
+      - Label:
+          default: "Raw Data Bucket Configuration"
+        Parameters:
+          - RawDataBucketBaseName
+      - Label:
+          default: "Processed Data Bucket Configuration"
+        Parameters:
+          - ProcessedDataBucketBaseName
+      - Label:
+          default: "Final Data Bucket Configuration"
+        Parameters:
+          - FinalDataBucketBaseName
       - Label:
           default: "Encryption Configuration"
         Parameters:
@@ -30,7 +41,11 @@ Metadata:
       ProjectName:
         default: "Project Name"
       RawDataBucketBaseName:
-        default: "Bucket Base Name"
+        default: "Raw Data Bucket Base Name"
+      ProcessedDataBucketBaseName:
+        default: "Processed Data Bucket Base Name"
+      FinalDataBucketBaseName:
+        default: "Final Data Bucket Base Name"
       Environment:
         default: "Environment"
       CiSuffix:
