@@ -7,6 +7,7 @@
 ## 📊 Executive Summary
 
 ### Phase 1: CloudFormation Infrastructure Setup ✅ COMPLETE
+
 - Root CloudFormation template with nested stack pattern
 - S3 bucket nested template with security defaults
 - Parameter groups organized by resource type
@@ -15,6 +16,7 @@
 - Deployment documentation
 
 ### Phase 2: Resource Creation (Pending)
+
 - 3 S3 buckets (raw, processed, final data)
 - IAM roles and policies for Lambda, Glue, and other services
 - Lambda functions for data processing
@@ -60,6 +62,7 @@
 ## 🎯 Current Phase: CloudFormation S3 Infrastructure
 
 ### What's Done
+
 - [x] Root template with 3 S3 bucket nested stacks
 - [x] Nested S3 bucket template with:
   - Deterministic bucket naming (ProjectName-BaseName-AccountId-Environment-Region)
@@ -73,6 +76,7 @@
 - [x] Deployment documentation
 
 ### Remaining for This Phase
+
 - [ ] Deploy CloudFormation stack to create S3 buckets
 - [ ] Verify S3 buckets are created and configured correctly
 - [ ] Test bucket policies and encryption
@@ -82,25 +86,30 @@
 ## 🚀 Next Phase: Additional CloudFormation Templates
 
 ### Priority 1: IAM Resources (Foundation for everything else)
+
 1. Create IAM role template for Lambda execution
 2. Create IAM role template for Glue services
 3. Create policy templates for data access
 
 ### Priority 2: Lambda Functions
+
 1. Create Lambda function template for data ingestion
 2. Create Lambda function template for data processing
 3. Attach IAM roles to functions
 
 ### Priority 3: AWS Glue Resources
+
 1. Create Glue database template
 2. Create Glue crawler template
 3. Create Glue ETL job template
 
 ### Priority 4: Event-Driven Architecture
+
 1. Create S3 event notification template
 2. Connect S3 events to Lambda/Glue
 
 ### Priority 5: Analytics
+
 1. Create Amazon Athena template (tables, workgroups)
 2. Create Amazon QuickSight template (dashboards)
 
@@ -109,7 +118,8 @@
 ## 🔧 Technical Details
 
 ### CloudFormation Structure
-```
+
+```text
 cloudformation/
 ├── template.yaml          # Root stack - references nested stacks
 ├── parameters.json        # Parameter values
@@ -124,13 +134,15 @@ scripts/
 ```
 
 ### Bucket Naming Convention
-```
+
+```text
 {ProjectName}-{BucketBaseName}-{AccountId}-{Environment}-{Region}[-{CiSuffix}]
 
 Example: ztc-etl-csv-raw-data-270453428528-devl-us-east-1
 ```
 
 ### Environment Variables (GitHub CI)
+
 - `AWS_REGION`: us-east-1
 - `AWS_ACCOUNT_ID`: 270453428528
 - `AWS_OIDC_ROLE_NAME`: Your OIDC role
@@ -141,13 +153,15 @@ Example: ztc-etl-csv-raw-data-270453428528-devl-us-east-1
 ## 📝 Issues Resolved
 
 ### ✅ Issue 1: Parameter Validation Error
+
 - **Error**: "Parameters: [Environment, EnableBucketKey, KmsKey] do not exist in the template"
 - **Root Cause**: Nested template was missing required parameters
 - **Resolution**: Created `templates/template.yaml` with all required parameters
 
 ### ✅ Issue 2: S3 Bucket Access Error in CI/CD
+
 - **Error**: "The bucket you are attempting to access must be addressed using the specified endpoint"
-- **Root Cause**: 
+- **Root Cause**:
   1. Nested template file name mismatch (s3-bucket.yaml vs template.yaml)
   2. S3 bucket policy missing CloudFormation service permissions
 - **Resolution**:
@@ -156,6 +170,7 @@ Example: ztc-etl-csv-raw-data-270453428528-devl-us-east-1
   3. Verified bucket is in correct region (us-east-1)
 
 ### ✅ Issue 3: CloudFormation Parameter Groups Organization
+
 - **Problem**: All S3 bucket parameters grouped together, unclear which bucket they apply to
 - **Resolution**: Reorganized into separate groups:
   - Common Bucket Configuration (ProjectName, Environment)
