@@ -130,7 +130,7 @@ Resources:
   S3RawDataBucketNestedStack:
     Type: AWS::CloudFormation::Stack
     DeletionPolicy: Delete
-    UpdateReplacePolicy: Retain
+    UpdateReplacePolicy: Delete
     Metadata:
       com.aws.cloudformation.Context:
         why: "Invokes the nested S3 bucket CloudFormation template to create a versioned, encrypted S3 bucket with public access blocking and optional logging/website configuration"
@@ -156,7 +156,7 @@ Resources:
   S3ProcessedDataBucketNestedStack:
     Type: AWS::CloudFormation::Stack
     DeletionPolicy: Delete
-    UpdateReplacePolicy: Retain
+    UpdateReplacePolicy: Delete
     Metadata:
       com.aws.cloudformation.Context:
         why: "Invokes the nested S3 bucket CloudFormation template to create a versioned, encrypted S3 bucket with public access blocking and optional logging/website configuration"
@@ -182,7 +182,7 @@ Resources:
   S3FinalDataBucketNestedStack:
     Type: AWS::CloudFormation::Stack
     DeletionPolicy: Delete
-    UpdateReplacePolicy: Retain
+    UpdateReplacePolicy: Delete
     Metadata:
       com.aws.cloudformation.Context:
         why: "Invokes the nested S3 bucket CloudFormation template to create a versioned, encrypted S3 bucket with public access blocking and optional logging/website configuration"
